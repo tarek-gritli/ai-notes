@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
-import LogOutButton from "./LogOutButton";
+import LogOutButton from "./buttons/LogOutButton";
 import { getUser } from "@/auth/server";
 
 async function Header() {
