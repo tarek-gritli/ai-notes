@@ -4,11 +4,13 @@ import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 import LogOutButton from "./buttons/LogOutButton";
 import { getUser } from "@/auth/server";
+import { SidebarTrigger } from "./ui/sidebar";
 
 async function Header() {
   const user = await getUser();
   return (
     <header className="bg-popover relative flex h-24 w-full items-center justify-between px-3 sm:px-8">
+      <SidebarTrigger className="absolute top-1 left-1" />
       <Link className="flex items-end gap-2" href="/">
         <Image src="/logo.png" height={60} width={60} alt="logo" priority />
 

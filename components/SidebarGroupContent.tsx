@@ -19,27 +19,26 @@ type Props = {
 
 function SidebarGroupContent({ notes }: Props) {
   const [searchText, setSearchText] = useState("");
-  const [localNotes, setLocalNotes] = useState(notes);
+  const [deletedNoteIds, setDeletedNoteIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    setLocalNotes(notes);
+    setDeletedNoteIds(new Set());
   }, [notes]);
 
-  const fuse = useMemo(() => {
-    return new Fuse(localNotes, {
-      keys: ["text"],
-      threshold: 0.4,
-    });
-  }, [localNotes]);
+  const visibleNotes = notes.filter((note) => !deletedNoteIds.has(note.id));
 
+  const fuse = new Fuse(visibleNotes, {
+    keys: ["text"],
+    threshold: 0.4,
+  });
+
+  // Filter notes based on search text
   const filteredNotes = searchText
     ? fuse.search(searchText).map((result) => result.item)
-    : localNotes;
+    : visibleNotes;
 
   const deleteNoteLocally = (noteId: string) => {
-    setLocalNotes((prevNotes) =>
-      prevNotes.filter((note) => note.id !== noteId),
-    );
+    setDeletedNoteIds((prevDeleted) => new Set(prevDeleted).add(noteId));
   };
 
   return (
