@@ -9,6 +9,7 @@ import { useTransition } from "react";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { loginAction, signUpAction } from "@/actions/users";
 
 type AuthFormProps = {
   type: "login" | "register";
@@ -26,7 +27,18 @@ function AuthForm({ type }: AuthFormProps) {
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
 
-      return;
+      let errorMessage;
+      if (isLoginForm) {
+        errorMessage = (await loginAction(email, password)).errorMessage;
+      } else {
+        errorMessage = (await signUpAction(email, password)).errorMessage;
+      }
+
+      if (!errorMessage) {
+        router.replace(`/?toastType=${type}`);
+      } else {
+        toast.error(errorMessage);
+      }
     });
   };
 

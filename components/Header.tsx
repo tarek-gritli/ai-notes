@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 import LogOutButton from "./LogOutButton";
+import { getUser } from "@/auth/server";
 
 async function Header() {
-  const user = null;
+  const user = await getUser();
   return (
     <header className="bg-popover relative flex h-24 w-full items-center justify-between px-3 sm:px-8">
       <Link className="flex items-end gap-2" href="/">
