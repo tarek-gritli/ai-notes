@@ -52,8 +52,8 @@ A modern, AI-powered note-taking application built with Next.js, TypeScript, and
    DB_URL="your-postgresql-connection-string"
 
    # Supabase
-   NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
-   NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+   SUPABASE_URL="your-supabase-url"
+   SUPABASE_ANON_KEY="your-supabase-anon-key"
 
    # OpenAI
    OPENAI_API_KEY="your-openai-api-key"
